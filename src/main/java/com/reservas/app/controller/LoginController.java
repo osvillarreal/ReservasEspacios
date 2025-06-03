@@ -55,6 +55,22 @@ public class LoginController {
             return "login";
         }
     }
+    
+    @GetMapping("/crear-admin")
+    @ResponseBody
+    public String crearAdminInicial() {
+        if (usuarioRepository.findByCorreo("admin@prueba.com") == null) {
+            Usuario admin = new Usuario();
+            admin.setNombre("Admin");
+            admin.setCorreo("admin@prueba.com");
+            admin.setContrasena("admin123");
+            admin.setRol("ADMINISTRADOR");
+            usuarioRepository.save(admin);
+            return "✅ Administrador creado correctamente con correo: admin@prueba.com y contraseña: admin123";
+        } else {
+            return "⚠️ El administrador ya existe.";
+        }
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
