@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Logística</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container-main {
+            width: 95%;
+            max-width: 1100px;
+            margin: 50px auto;
+        }
+
+        .header-box {
+            background-color: #152b55;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .table-container {
+            background-color: #152b55;
+            color: #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .table {
+            color: #f8f9fa;
+        }
+
+        .table thead {
+            background-color: #203a56;
+            color: #ffffff;
+        }
+
+        .table tbody tr {
+            background-color: #243447;
+        }
+
+        .btn-custom {
+            border-radius: 30px;
+            padding: 8px 18px;
+            font-weight: 500;
+            background-color: #f8f9fa;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-outline-light {
+            border: 1px solid #2c5364;
+            color: #2c5364;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #2c5364;
+            color: white;
+        }
+
+        .btn-sm {
+            border-radius: 20px;
+            padding: 5px 12px;
+        }
+
+        .btn-primary {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        footer {
+            background-color: #152b55;
+            color: #ccc;
+            text-align: center;
+            padding: 14px 0;
+            font-size: 14px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-main">
+
+    <div class="header-box">
+        <h2><i class="fas fa-users-cog"></i> Gestión de Usuarios de Logística</h2>
+        <p class="mb-0">Administra los usuarios con rol de logística: creación, edición o eliminación.</p>
+    </div>
+
+    <div class="table-container">
+        <div class="d-flex justify-content-between mb-4">
+            <a href="/admin/usuarios/logistica/crear" class="btn btn-success btn-custom">
+                <i class="fas fa-user-plus"></i> Nuevo Usuario
+            </a>
+            <a href="/admin/usuarios" class="btn btn-custom">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.id}"></td>
+                        <td th:text="${usuario.nombre}"></td>
+                        <td th:text="${usuario.correo}"></td>
+                        <td class="text-center">
+                            <a th:href="@{'/admin/usuarios/logistica/editar/' + ${usuario.id}}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a th:href="@{'/admin/usuarios/logistica/eliminar/' + ${usuario.id}}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este usuario?')">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    Desarrollado por Villarreal y Rueda || Programación en Java || Grupo B191
+</footer>
+
+</body>
+</html>
