@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login de Usuarios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap & Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            position: relative;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            margin-top: 8%;
+        }
+
+        .icon-user {
+            font-size: 60px;
+            color: #2a5298;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #2a5298;
+            text-align: center;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 12px;
+            color: #aaa;
+        }
+
+        .form-control {
+            padding-left: 40px;
+            height: 45px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #2a5298;
+            border: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e3c72;
+        }
+
+        .alert {
+            margin-top: 15px;
+        }
+
+        .credentials-card {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            width: 320px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .credentials-card h4 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .role-section {
+            margin-bottom: 20px;
+        }
+
+        .role-section h5 {
+            font-size: 16px;
+            color: #1e3c72;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .role-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .role-section ul li {
+            font-size: 13px;
+            background: #f0f0f0;
+            margin-bottom: 5px;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 992px) {
+            .credentials-card {
+                position: static;
+                width: 100%;
+                margin-top: 20px;
+                margin-bottom: 30px;
+            }
+
+            .login-card {
+                margin-top: 30px;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="icon-user">
+        <i class="fas fa-user-circle"></i>
+    </div>
+    <h2>Iniciar Sesión</h2>
+    <form method="post" action="/login">
+        <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="correo" class="form-control" placeholder="Correo electrónico" required />
+        </div>
+        <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="contrasena" class="form-control" placeholder="Contraseña" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}"></div>
+    </form>
+</div>
+
+<div class="credentials-card">
+    <h4><i class="fas fa-id-card"></i> Usuarios de Prueba</h4>
+
+    <div class="role-section">
+        <h5>Administrador</h5>
+        <ul>
+            <li th:each="u : ${usuariosAdmin}">
+                <strong th:text="${u.nombre}"></strong><br>
+                <small th:text="'Correo: ' + ${u.correo}"></small>
+                <small th:text="'Contraseña: ' + ${u.contrasena}"></small>
+            </li>
+        </ul>
+    </div>
+
+    <div class="role-section">
+        <h5>Coordinador</h5>
+        <ul>
+            <li th:each="u : ${usuariosCoord}">
+                <strong th:text="${u.nombre}"></strong><br>
+                <small th:text="'Correo: ' + ${u.correo}"></small>
+                <small th:text="'Contraseña: ' + ${u.contrasena}"></small>
+            </li>
+        </ul>
+    </div>
+
+    <div class="role-section">
+        <h5>Estudiante</h5>
+        <ul>
+            <li th:each="u : ${usuariosEst}">
+                <strong th:text="${u.nombre}"></strong><br>
+                <small th:text="'Correo: ' + ${u.correo}"></small>
+                <small th:text="'Contraseña: ' + ${u.contrasena}"></small>
+            </li>
+        </ul>
+    </div>
+
+    <div class="role-section">
+        <h5>Profesor</h5>
+        <ul>
+            <li th:each="u : ${usuariosProf}">
+                <strong th:text="${u.nombre}"></strong><br>
+                <small th:text="'Correo: ' + ${u.correo}"></small>
+                <small th:text="'Contraseña: ' + ${u.contrasena}"></small>
+            </li>
+        </ul>
+    </div>
+
+    <div class="role-section">
+        <h5>Logística</h5>
+        <ul>
+            <li th:each="u : ${usuariosLog}">
+                <strong th:text="${u.nombre}"></strong><br>
+                <small th:text="'Correo: ' + ${u.correo}"></small>
+                <small th:text="'Contraseña: ' + ${u.contrasena}"></small>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

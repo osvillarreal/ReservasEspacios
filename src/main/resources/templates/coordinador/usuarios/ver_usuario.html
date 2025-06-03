@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Datos del Usuario</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            padding-top: 60px;
+        }
+
+        .container-box {
+            background-color: #1c2b3f;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.4);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .container-box h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #f8f9fa;
+            color: #212529;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .card-body p {
+            font-size: 1.1rem;
+        }
+
+        .btn-secondary {
+            display: block;
+            width: fit-content;
+            margin: 20px auto 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-box">
+    <h2><i class="fas fa-user"></i> Datos de Contacto del Usuario</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Nombre:</strong> <span th:text="${usuario.nombre}"></span></p>
+            <p><strong>Correo:</strong> <span th:text="${usuario.correo}"></span></p>
+            <p><strong>Rol:</strong> <span th:text="${usuario.rol}"></span></p>
+        </div>
+    </div>
+
+    <a href="/coordinador/solicitudes" class="btn btn-secondary">⬅️ Volver a Solicitudes</a>
+</div>
+
+<!-- Font Awesome (opcional para íconos) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</body>
+</html>
